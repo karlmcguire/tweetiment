@@ -3,7 +3,6 @@ import tweepy
 import numpy as np
 from textblob import TextBlob
 
-
 def tweet_analysis(query):
     # get tweets
     tweets = tweepy.Cursor(api.search, q = query + " -filter:retweets").items(20)
@@ -37,6 +36,9 @@ def is_english(text):
 
 def get_polarity_mean(valid_tweets):
     try: 
+        if len(valid_tweets["polarity"]) == 0:
+            return 0
+            
         return np.mean(valid_tweets["polarity"])
     except:
         return 0

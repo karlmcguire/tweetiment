@@ -14,7 +14,10 @@ def tweet_analysis(query):
         subjectivities = []
 
         if not is_english(phrase):
-            phrase = TextBlob(str(phrase.translate(to = "en")))
+            try: 
+                phrase = TextBlob(str(phrase.translate(to = "en")))
+            except:
+                phrase = phrase
 
         if phrase.sentiment.polarity != 0.0 and phrase.sentiment.subjectivity != 0.0:
             polarities.append(phrase.sentiment.polarity)
@@ -33,10 +36,16 @@ def is_english(text):
     return False
 
 def get_polarity_mean(valid_tweets):
-    return np.mean(valid_tweets["polarity"])
+    try: 
+        return np.mean(valid_tweets["polarity"])
+    except:
+        return 0
 
 def get_weighted_polarity_mean(valid_tweets):
-    return np.average(valid_tweets["polarity"], weights=valid_tweets["subjectivity"])
+    try:
+        return np.average(valid_tweets["polarity"], weights=valid_tweets["subjectivity"])
+    except:
+        return 0
 
 def print_result(mean):
     if mean > 0.0:

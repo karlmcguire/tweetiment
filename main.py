@@ -77,11 +77,12 @@ auth.set_access_token(access_token, access_token_secret)
 # create api object
 api = tweepy.API(auth)
 
-query = input("Enter a query to find: ")
-analysis = tweet_analysis(query)
+if __name__ == "__main__":
+    query = input("Enter a query to find: ")
+    analysis = tweet_analysis(query)
 
-print("WEIGHTED MEAN: " + str(get_weighted_polarity_mean(analysis)))
-print_result(get_weighted_polarity_mean(analysis))
+    print("WEIGHTED MEAN: " + str(get_weighted_polarity_mean(analysis)))
+    print_result(get_weighted_polarity_mean(analysis))
 
-print("MEAN: " + str(get_polarity_mean(analysis)))
-print_result(get_polarity_mean(analysis))
+    print("MEAN: " + str(get_polarity_mean(analysis)))
+    print_result(get_polarity_mean(analysis))
